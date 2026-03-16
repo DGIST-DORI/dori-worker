@@ -1,5 +1,5 @@
 {
-  "name": "dori-offline",
+  "name": "dori-worker",
   "version": "1.0.0",
   "description": "DORI Dashboard — Cloudflare Worker offline page",
   "main": "src/index.js",
