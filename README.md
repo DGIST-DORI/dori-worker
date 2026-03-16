@@ -1,4 +1,4 @@
-# dori-offline
+# dori-worker
 
 DORI 대시보드 오프라인 안내 페이지 — Cloudflare Worker
 
@@ -7,7 +7,7 @@ DORI 대시보드 오프라인 안내 페이지 — Cloudflare Worker
 ## File Structure
 
 ```
-dori-offline/
+dori-worker/
 ├── src/
 │   ├── index.js        # Worker 진입점
 │   └── offline.html    # 오프라인 안내 페이지 HTML
