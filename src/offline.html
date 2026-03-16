@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,21 +10,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-0:       #080b0f;
-      --bg-1:       #0d1117;
-      --bg-2:       #141b23;
-      --bg-3:       #1c2530;
-      --border:     #1e2d3d;
-      --text-0:     #e2eaf2;
-      --text-1:     #8899aa;
-      --text-2:     #4a5a6a;
-      --accent:     #00c8ff;
-      --accent-dim: rgba(0,200,255,0.10);
-      --accent-glow:rgba(0,200,255,0.20);
-      --yellow:     #ecd85b;
-      --red:        #ff5f5f;
-      --font-mono:  'JetBrains Mono', 'Fira Mono', monospace;
-      --radius:     6px;
+      --bg-0:        #080b0f;
+      --bg-1:        #0d1117;
+      --bg-2:        #141b23;
+      --border:      #1e2d3d;
+      --text-0:      #e2eaf2;
+      --text-1:      #8899aa;
+      --text-2:      #4a5a6a;
+      --accent:      #00c8ff;
+      --accent-dim:  rgba(0,200,255,0.10);
+      --accent-glow: rgba(0,200,255,0.20);
+      --red:         #ff5f5f;
+      --font-mono:   'JetBrains Mono', 'Fira Mono', monospace;
+      --radius:      6px;
     }
 
     html, body {
@@ -37,7 +35,6 @@
       justify-content: center;
     }
 
-    /* ── 배경 그리드 ── */
     body::before {
       content: '';
       position: fixed;
@@ -50,7 +47,6 @@
       pointer-events: none;
     }
 
-    /* ── 중앙 카드 ── */
     .card {
       position: relative;
       background: var(--bg-1);
@@ -62,13 +58,14 @@
       box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
     }
 
-    /* ── 상단 로고 ── */
-    .logo {
+    /* ── 상단 행: 로고 + 언어 토글 ── */
+    .top-row {
       display: flex;
-      align-items: baseline;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 36px;
     }
+    .logo { display: flex; align-items: baseline; gap: 8px; }
     .logo-dori {
       font-size: 22px;
       font-weight: 600;
@@ -76,8 +73,30 @@
       letter-spacing: 3px;
       text-shadow: 0 0 12px var(--accent-glow);
     }
-    .logo-sep  { color: var(--text-2); font-size: 16px; }
-    .logo-sub  { color: var(--text-1); font-size: 12px; letter-spacing: 1px; }
+    .logo-sep { color: var(--text-2); font-size: 16px; }
+    .logo-sub { color: var(--text-1); font-size: 12px; letter-spacing: 1px; }
+
+    /* ── 언어 토글 버튼 ── */
+    .lang-toggle { display: flex; gap: 4px; }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-2);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .lang-btn:hover { border-color: var(--text-1); color: var(--text-1); }
+    .lang-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
 
     /* ── 상태 배지 ── */
     .status-row {
@@ -106,7 +125,6 @@
       text-transform: uppercase;
     }
 
-    /* ── 본문 ── */
     h1 {
       font-size: 18px;
       font-weight: 600;
@@ -120,18 +138,14 @@
       line-height: 1.8;
       margin-bottom: 32px;
     }
-    .desc strong {
-      color: var(--text-0);
-    }
+    .desc strong { color: var(--text-0); }
 
-    /* ── 구분선 ── */
     hr {
       border: none;
       border-top: 1px solid var(--border);
       margin-bottom: 28px;
     }
 
-    /* ── 링크 목록 ── */
     .links-label {
       font-size: 9px;
       font-weight: 700;
@@ -140,11 +154,7 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .links { display: flex; flex-direction: column; gap: 8px; }
     .link-item {
       display: flex;
       align-items: center;
@@ -163,18 +173,12 @@
       background: var(--accent-dim);
       color: var(--accent);
     }
-    .link-icon {
-      font-size: 14px;
-      flex-shrink: 0;
-      width: 18px;
-      text-align: center;
-    }
+    .link-icon { font-size: 14px; flex-shrink: 0; width: 18px; text-align: center; }
     .link-info { display: flex; flex-direction: column; gap: 2px; }
     .link-title { font-weight: 600; }
     .link-url   { font-size: 9px; color: var(--text-2); }
     .link-item:hover .link-url { color: var(--accent); opacity: 0.7; }
 
-    /* ── 하단 ── */
     .footer {
       margin-top: 32px;
       font-size: 9px;
@@ -182,15 +186,24 @@
       text-align: right;
       letter-spacing: 0.5px;
     }
+
+    /* ── i18n: 기본은 영어, JS로 전환 ── */
+    [data-lang="ko"] { display: none; }
   </style>
 </head>
 <body>
   <div class="card">
 
-    <div class="logo">
-      <span class="logo-dori">DORI</span>
-      <span class="logo-sep">/</span>
-      <span class="logo-sub">dashboard</span>
+    <div class="top-row">
+      <div class="logo">
+        <span class="logo-dori">DORI</span>
+        <span class="logo-sep">/</span>
+        <span class="logo-sub">dashboard</span>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn"        onclick="setLang('ko')">KO</button>
+      </div>
     </div>
 
     <div class="status-row">
@@ -198,17 +211,31 @@
       <span class="status-text">Robot Offline</span>
     </div>
 
-    <h1>대시보드에 연결할 수 없어요</h1>
+    <h1>
+      <span data-lang="en">Unable to connect to dashboard</span>
+      <span data-lang="ko">대시보드에 연결할 수 없어요</span>
+    </h1>
 
     <p class="desc">
-      현재 <strong>DORI 로봇 서버가 꺼져 있거나</strong> 점검 중이에요.<br />
-      서버가 켜져 있을 때 다시 접속하거나,<br />
-      아래 링크에서 프로젝트 정보를 확인해보세요.
+      <span data-lang="en">
+        The <strong>DORI robot server is currently offline</strong> or under maintenance.<br />
+        Please try again later when the server is running, or<br />
+        check out the project info via the links below.
+      </span>
+      <span data-lang="ko">
+        현재 <strong>DORI 로봇 서버가 꺼져 있거나</strong> 점검 중이에요.<br />
+        서버가 켜져 있을 때 다시 접속하거나,<br />
+        아래 링크에서 프로젝트 정보를 확인해보세요.
+      </span>
     </p>
 
     <hr />
 
-    <div class="links-label">바로가기</div>
+    <div class="links-label">
+      <span data-lang="en">Quick Links</span>
+      <span data-lang="ko">바로가기</span>
+    </div>
+
     <div class="links">
       <a class="link-item" href="https://github.com/DGIST-DORI/dori" target="_blank">
         <span class="link-icon">⌥</span>
@@ -220,9 +247,39 @@
     </div>
 
     <div class="footer">
-      DGIST UGRP 2026 · Autonomous Spherical Campus Guide Robot
+      DGIST UGRP 2026 · Campus Guide DORI
     </div>
 
   </div>
+
+  <script>
+    const STORAGE_KEY = 'dori-lang';
+
+    function setLang(lang) {
+      // 버튼 active 상태
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+      });
+
+      // 텍스트 전환: 해당 lang만 block/inline 표시, 나머지 숨김
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? '' : 'none';
+      });
+
+      document.documentElement.lang = lang;
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch {}
+    }
+
+    // 초기 언어 결정:
+    //   1) localStorage 저장값
+    //   2) 브라우저 언어가 한국어면 ko
+    //   3) 기본 en
+    (function () {
+      let lang = 'en';
+      try { lang = localStorage.getItem(STORAGE_KEY) || lang; } catch {}
+      if (lang === 'en' && navigator.language?.startsWith('ko')) lang = 'ko';
+      setLang(lang);
+    })();
+  </script>
 </body>
 </html>
