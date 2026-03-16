@@ -4,7 +4,7 @@ DORI 대시보드 오프라인 안내 페이지 — Cloudflare Worker
 
 `dash.dgist-dori.xyz` 접속 시 Jetson 서버가 꺼져있으면 오프라인 안내 페이지를 보여줍니다.
 
-## 파일 구조
+## File Structure
 
 ```
 dori-offline/
@@ -15,7 +15,8 @@ dori-offline/
 └── package.json
 ```
 
-## GitHub 연동 배포 방법
+## Usage
+### With GitHub
 
 1. 이 레포지토리를 Cloudflare Workers & Pages 에 연결
    - Cloudflare 대시보드 → **Workers & Pages** → **Create**
@@ -28,7 +29,7 @@ dori-offline/
    - `dash.dgist-dori.xyz/*` 라우트가 자동 등록되어 있어야 함
    - 없으면 수동으로 추가
 
-## 수동 배포 방법 (wrangler CLI)
+### 수동 배포 방법 wrangler CLI
 
 ```bash
 npm install
