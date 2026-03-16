@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DORI — Offline</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0:       #080b0f;
+      --bg-1:       #0d1117;
+      --bg-2:       #141b23;
+      --bg-3:       #1c2530;
+      --border:     #1e2d3d;
+      --text-0:     #e2eaf2;
+      --text-1:     #8899aa;
+      --text-2:     #4a5a6a;
+      --accent:     #00c8ff;
+      --accent-dim: rgba(0,200,255,0.10);
+      --accent-glow:rgba(0,200,255,0.20);
+      --yellow:     #ecd85b;
+      --red:        #ff5f5f;
+      --font-mono:  'JetBrains Mono', 'Fira Mono', monospace;
+      --radius:     6px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-0);
+      color: var(--text-0);
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── 배경 그리드 ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* ── 중앙 카드 ── */
+    .card {
+      position: relative;
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 52px;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+    }
+
+    /* ── 상단 로고 ── */
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+    .logo-dori {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-shadow: 0 0 12px var(--accent-glow);
+    }
+    .logo-sep  { color: var(--text-2); font-size: 16px; }
+    .logo-sub  { color: var(--text-1); font-size: 12px; letter-spacing: 1px; }
+
+    /* ── 상태 배지 ── */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 6px var(--red);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    .status-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── 본문 ── */
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-0);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .desc {
+      font-size: 12px;
+      color: var(--text-1);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .desc strong {
+      color: var(--text-0);
+    }
+
+    /* ── 구분선 ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    /* ── 링크 목록 ── */
+    .links-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-2);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text-0);
+      font-size: 11px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .link-item:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+    .link-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+      width: 18px;
+      text-align: center;
+    }
+    .link-info { display: flex; flex-direction: column; gap: 2px; }
+    .link-title { font-weight: 600; }
+    .link-url   { font-size: 9px; color: var(--text-2); }
+    .link-item:hover .link-url { color: var(--accent); opacity: 0.7; }
+
+    /* ── 하단 ── */
+    .footer {
+      margin-top: 32px;
+      font-size: 9px;
+      color: var(--text-2);
+      text-align: right;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="logo">
+      <span class="logo-dori">DORI</span>
+      <span class="logo-sep">/</span>
+      <span class="logo-sub">dashboard</span>
+    </div>
+
+    <div class="status-row">
+      <div class="status-dot"></div>
+      <span class="status-text">Robot Offline</span>
+    </div>
+
+    <h1>대시보드에 연결할 수 없어요</h1>
+
+    <p class="desc">
+      현재 <strong>DORI 로봇 서버가 꺼져 있거나</strong> 점검 중이에요.<br />
+      서버가 켜져 있을 때 다시 접속하거나,<br />
+      아래 링크에서 프로젝트 정보를 확인해보세요.
+    </p>
+
+    <hr />
+
+    <div class="links-label">바로가기</div>
+    <div class="links">
+      <a class="link-item" href="https://github.com/DGIST-DORI/dori" target="_blank">
+        <span class="link-icon">⌥</span>
+        <div class="link-info">
+          <span class="link-title">GitHub Repository</span>
+          <span class="link-url">github.com/DGIST-DORI/dori</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">
+      DGIST UGRP 2026 · Autonomous Spherical Campus Guide Robot
+    </div>
+
+  </div>
+</body>
+</html>

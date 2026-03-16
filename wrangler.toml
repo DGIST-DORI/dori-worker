@@ -1,0 +1,11 @@
+name = "dori-offline"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[build]
+command = ""
+
+# dash.dgist-dori.xyz 로 들어오는 모든 요청을 이 Worker 가 처리
+[[routes]]
+pattern = "dash.dgist-dori.xyz/*"
+zone_name = "dgist-dori.xyz"
