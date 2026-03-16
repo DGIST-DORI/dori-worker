@@ -8,10 +8,11 @@
 import OFFLINE_HTML from './offline.html';
 
 // Cloudflare 가 origin 에 도달하지 못했을 때 반환하는 상태코드
-const OFFLINE_CODES = new Set([503, 521, 522, 523, 530]);
+const OFFLINE_CODES = new Set([502, 503, 521, 522, 523, 530]);
 
 // 에러 코드별 설명
 const ERROR_DESC = {
+  502: 'Bad Gateway — Cloudflare received an invalid response from the origin server.',
   503: 'Service Unavailable — origin server is down or not responding.',
   521: 'Web Server Is Down — Cloudflare cannot connect to the origin server.',
   522: 'Connection Timed Out — origin server did not respond in time.',
