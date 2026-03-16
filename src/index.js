@@ -49,10 +49,10 @@ export default {
 function offlinePage(statusCode, errorDesc, url) {
   // HTML 의 플레이스홀더를 실제 값으로 교체
   const html = OFFLINE_HTML
-    .replace('{{STATUS_CODE}}',  statusCode || 'N/A')
-    .replace('{{ERROR_DESC}}',   errorDesc)
-    .replace('{{REQUEST_URL}}',  url?.href ?? 'unknown')
-    .replace('{{TIMESTAMP}}',    new Date().toISOString());
+    .replace(/{{STATUS_CODE}}/g,  statusCode || 'N/A')
+    .replace(/{{ERROR_DESC}}/g,   errorDesc)
+    .replace(/{{REQUEST_URL}}/g,  url?.href ?? 'unknown')
+    .replace(/{{TIMESTAMP}}/g,    new Date().toISOString());
 
   return new Response(html, {
     status: 503,
