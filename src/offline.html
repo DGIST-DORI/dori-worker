@@ -13,6 +13,7 @@
       --bg-0:        #080b0f;
       --bg-1:        #0d1117;
       --bg-2:        #141b23;
+      --bg-3:        #1c2530;
       --border:      #1e2d3d;
       --text-0:      #e2eaf2;
       --text-1:      #8899aa;
@@ -21,6 +22,9 @@
       --accent-dim:  rgba(0,200,255,0.10);
       --accent-glow: rgba(0,200,255,0.20);
       --red:         #ff5f5f;
+      --red-dim:     rgba(255,95,95,0.10);
+      --yellow:      #ecd85b;
+      --yellow-dim:  rgba(236,216,91,0.10);
       --font-mono:   'JetBrains Mono', 'Fira Mono', monospace;
       --radius:      6px;
     }
@@ -52,31 +56,31 @@
       background: var(--bg-1);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 48px 52px;
-      max-width: 520px;
-      width: 90%;
+      padding: 44px 48px;
+      max-width: 560px;
+      width: 92%;
       box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
     }
 
-    /* ── 상단 행: 로고 + 언어 토글 ── */
+    /* ── 상단 행 ── */
     .top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
     .logo { display: flex; align-items: baseline; gap: 8px; }
     .logo-dori {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 600;
       color: var(--accent);
       letter-spacing: 3px;
       text-shadow: 0 0 12px var(--accent-glow);
     }
-    .logo-sep { color: var(--text-2); font-size: 16px; }
-    .logo-sub { color: var(--text-1); font-size: 12px; letter-spacing: 1px; }
+    .logo-sep { color: var(--text-2); font-size: 14px; }
+    .logo-sub { color: var(--text-1); font-size: 11px; letter-spacing: 1px; }
 
-    /* ── 언어 토글 버튼 ── */
+    /* ── 언어 토글 ── */
     .lang-toggle { display: flex; gap: 4px; }
     .lang-btn {
       background: transparent;
@@ -103,7 +107,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .status-dot {
       width: 8px; height: 8px;
@@ -125,34 +129,123 @@
       text-transform: uppercase;
     }
 
+    /* ── 에러 코드 블록 ── */
+    .error-block {
+      background: var(--red-dim);
+      border: 1px solid rgba(255,95,95,0.25);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .error-code-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .error-code {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .error-label {
+      font-size: 10px;
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .error-desc {
+      font-size: 10px;
+      color: var(--text-1);
+      line-height: 1.6;
+    }
+
+    /* ── 본문 ── */
     h1 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       color: var(--text-0);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       line-height: 1.4;
     }
     .desc {
       font-size: 12px;
       color: var(--text-1);
       line-height: 1.8;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .desc strong { color: var(--text-0); }
 
     hr {
       border: none;
       border-top: 1px solid var(--border);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
+    /* ── 디버그 정보 (접기/펼치기) ── */
+    .debug-section { margin-bottom: 24px; }
+    .debug-toggle {
+      background: transparent;
+      border: none;
+      color: var(--text-2);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .debug-toggle:hover { color: var(--text-1); }
+    .debug-toggle .arrow { transition: transform 0.2s; display: inline-block; }
+    .debug-toggle.open .arrow { transform: rotate(90deg); }
+    .debug-body {
+      display: none;
+      margin-top: 10px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .debug-body.open { display: flex; }
+    .debug-row {
+      display: flex;
+      gap: 12px;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+    .debug-key {
+      color: var(--text-2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+      width: 72px;
+    }
+    .debug-val {
+      color: var(--text-1);
+      word-break: break-all;
+      font-family: var(--font-mono);
+    }
+
+    /* ── 링크 ── */
     .links-label {
       font-size: 9px;
       font-weight: 700;
       color: var(--text-2);
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .links { display: flex; flex-direction: column; gap: 8px; }
     .link-item {
@@ -180,20 +273,18 @@
     .link-item:hover .link-url { color: var(--accent); opacity: 0.7; }
 
     .footer {
-      margin-top: 32px;
+      margin-top: 28px;
       font-size: 9px;
       color: var(--text-2);
       text-align: right;
       letter-spacing: 0.5px;
     }
-
-    /* ── i18n: 기본은 영어, JS로 전환 ── */
-    [data-lang="ko"] { display: none; }
   </style>
 </head>
 <body>
   <div class="card">
 
+    <!-- 상단: 로고 + 언어 토글 -->
     <div class="top-row">
       <div class="logo">
         <span class="logo-dori">DORI</span>
@@ -201,40 +292,66 @@
         <span class="logo-sub">dashboard</span>
       </div>
       <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn"        onclick="setLang('ko')">KO</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-ko" onclick="setLang('ko')">KO</button>
       </div>
     </div>
 
+    <!-- 상태 배지 -->
     <div class="status-row">
       <div class="status-dot"></div>
       <span class="status-text">Robot Offline</span>
     </div>
 
-    <h1>
-      <span data-lang="en">Unable to connect to dashboard</span>
-      <span data-lang="ko">대시보드에 연결할 수 없어요</span>
-    </h1>
+    <!-- 에러 코드 블록 -->
+    <div class="error-block">
+      <div class="error-code-row">
+        <span class="error-code">{{STATUS_CODE}}</span>
+        <span class="error-label" id="lbl-error-label">Error</span>
+      </div>
+      <div class="error-desc">{{ERROR_DESC}}</div>
+    </div>
 
-    <p class="desc">
-      <span data-lang="en">
-        The <strong>DORI robot server is currently offline</strong> or under maintenance.<br />
-        Please try again later when the server is running, or<br />
-        check out the project info via the links below.
-      </span>
-      <span data-lang="ko">
-        현재 <strong>DORI 로봇 서버가 꺼져 있거나</strong> 점검 중이에요.<br />
-        서버가 켜져 있을 때 다시 접속하거나,<br />
-        아래 링크에서 프로젝트 정보를 확인해보세요.
-      </span>
+    <!-- 제목 -->
+    <h1 id="txt-title">Unable to connect to dashboard</h1>
+
+    <!-- 설명 -->
+    <p class="desc" id="txt-desc">
+      The <strong>DORI robot server is currently offline</strong> or under maintenance.<br />
+      Please try again later when the server is running, or<br />
+      check out the project info via the links below.
     </p>
 
     <hr />
 
-    <div class="links-label">
-      <span data-lang="en">Quick Links</span>
-      <span data-lang="ko">바로가기</span>
+    <!-- 디버그 정보 (접기/펼치기) -->
+    <div class="debug-section">
+      <button class="debug-toggle" id="debug-toggle" onclick="toggleDebug()">
+        <span class="arrow">▶</span>
+        <span id="txt-debug-label">Debug Info</span>
+      </button>
+      <div class="debug-body" id="debug-body">
+        <div class="debug-row">
+          <span class="debug-key">Status</span>
+          <span class="debug-val">{{STATUS_CODE}}</span>
+        </div>
+        <div class="debug-row">
+          <span class="debug-key">URL</span>
+          <span class="debug-val">{{REQUEST_URL}}</span>
+        </div>
+        <div class="debug-row">
+          <span class="debug-key">Time</span>
+          <span class="debug-val">{{TIMESTAMP}}</span>
+        </div>
+        <div class="debug-row">
+          <span class="debug-key">Detail</span>
+          <span class="debug-val">{{ERROR_DESC}}</span>
+        </div>
+      </div>
     </div>
+
+    <!-- 링크 레이블 -->
+    <div class="links-label" id="txt-links-label">Quick Links</div>
 
     <div class="links">
       <a class="link-item" href="https://github.com/DGIST-DORI/dori" target="_blank">
@@ -247,7 +364,7 @@
     </div>
 
     <div class="footer">
-      DGIST UGRP 2026 · Campus Guide DORI
+      DGIST UGRP 2026 · Autonomous Spherical Campus Guide Robot
     </div>
 
   </div>
@@ -255,19 +372,45 @@
   <script>
     const STORAGE_KEY = 'dori-lang';
 
+    const I18N = {
+      en: {
+        'txt-title':        'Unable to connect to dashboard',
+        'txt-desc':         'The <strong>DORI robot server is currently offline</strong> or under maintenance.<br />Please try again later when the server is running, or<br />check out the project info via the links below.',
+        'txt-debug-label':  'Debug Info',
+        'txt-links-label':  'Quick Links',
+        'lbl-error-label':  'Error',
+      },
+      ko: {
+        'txt-title':        '대시보드에 연결할 수 없어요',
+        'txt-desc':         '현재 <strong>DORI 로봇 서버가 꺼져 있거나</strong> 점검 중이에요.<br />서버가 켜져 있을 때 다시 접속하거나,<br />아래 링크에서 프로젝트 정보를 확인해보세요.',
+        'txt-debug-label':  '디버그 정보',
+        'txt-links-label':  '바로가기',
+        'lbl-error-label':  '오류',
+      },
+    };
+
     function setLang(lang) {
-      // 버튼 active 상태
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+      const strings = I18N[lang] || I18N.en;
+
+      // 텍스트 교체
+      Object.entries(strings).forEach(([id, html]) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
       });
 
-      // 텍스트 전환: 해당 lang만 block/inline 표시, 나머지 숨김
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = el.dataset.lang === lang ? '' : 'none';
-      });
+      // 버튼 active 상태
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
 
       document.documentElement.lang = lang;
       try { localStorage.setItem(STORAGE_KEY, lang); } catch {}
+    }
+
+    function toggleDebug() {
+      const btn  = document.getElementById('debug-toggle');
+      const body = document.getElementById('debug-body');
+      const open = body.classList.toggle('open');
+      btn.classList.toggle('open', open);
     }
 
     // 초기 언어 결정:
